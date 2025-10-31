@@ -21,12 +21,20 @@ namespace TaskManager.API
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            // var tasks = await _context.Tasks
-            //     .Include(t => t.User)
-            //     .ToListAsync();
+            //adding the user data with their task, re-arranging gathered data so it will more readable
+            //Example:
+            // user=>[
+            //    data_info,
+            //      tasks=>[
+            //      task_1 => ['details],
+            //      task_2 => ['details],
+            //  ]
+            //]
+
             var users = await _context.Users
             .Include(u => u.Tasks)
             .ToListAsync();
+
             // var tasks = await _context.Tasks.ToListAsync();
             return Ok(users);
         }
